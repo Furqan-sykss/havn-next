@@ -43,16 +43,7 @@ interface Props extends Media {
  * With no `src` it renders the art-directed placeholder plate, so the
  * composition can be judged before a single asset exists.
  */
-export default function RevealImage({
-  src,
-  alt,
-  tag,
-  tone = "a",
-  className = "",
-  parallax = 0,
-  priority = false,
-  sizes = "(max-width: 900px) 100vw, 60vw",
-}: Props) {
+export default function RevealImage({ src, alt, tag, tone = "a", className = "", parallax = 0, priority = false, sizes = "(max-width: 900px) 100vw, 60vw" }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduced = usePrefersReducedMotion();
   const imageSrc = src ?? LOCAL_IMAGE_BY_ALT[alt];
@@ -62,18 +53,9 @@ export default function RevealImage({
 
   return (
     <motion.figure ref={ref} className={`fig ${className}`}>
-      <motion.div
-        className="inner"
-        variants={reduced ? undefined : imageReveal}
-        initial={reduced ? false : "hidden"}
-        animate="visible"
-      >
+      <motion.div className="inner" variants={reduced ? undefined : imageReveal} initial={reduced ? false : "hidden"} animate="visible">
         <motion.div className="par" style={reduced || !parallax ? undefined : { y }}>
-          {imageSrc ? (
-            <Image src={imageSrc} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
-          ) : (
-            <div className={`ph ${TONE_CLASS[tone]}`} role="img" aria-label={alt} />
-          )}
+          {imageSrc ? <Image src={imageSrc} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" /> : <div className={`ph ${TONE_CLASS[tone]}`} role="img" aria-label={alt} />}
         </motion.div>
       </motion.div>
       <figcaption className="ph-tag">{tag}</figcaption>

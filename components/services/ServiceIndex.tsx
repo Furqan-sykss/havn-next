@@ -44,11 +44,7 @@ export default function ServiceIndex() {
       <div className="srv-wrap" ref={wrapRef} onMouseLeave={() => setHovered(null)}>
         {fine && (
           <div className={`srv-preview ${hovered !== null ? "on" : ""}`} style={{ top: previewTop }} aria-hidden="true">
-            {hovered !== null ? (
-              <Image src={SERVICE_IMAGES[hovered]} alt="" fill sizes="250px" loading="eager" className="object-cover" />
-            ) : (
-              <div className={`ph ${TONE_CLASS[services[0].tone]}`} />
-            )}
+            {hovered !== null ? <Image src={SERVICE_IMAGES[hovered]} alt="" fill sizes="250px" loading="eager" className="object-cover" /> : <div className={`ph ${TONE_CLASS[services[0].tone]}`} />}
             <span className="ph-tag">[IMAGE] service preview</span>
           </div>
         )}
@@ -68,12 +64,7 @@ export default function ServiceIndex() {
                 setPreviewTop((itemRefs.current[i]?.offsetTop ?? 0) - 40);
               }}
             >
-              <button
-                className="srv-btn"
-                aria-expanded={isOpen}
-                aria-controls={`panel-${service.id}`}
-                onClick={() => setOpen(isOpen ? null : service.id)}
-              >
+              <button className="srv-btn" aria-expanded={isOpen} aria-controls={`panel-${service.id}`} onClick={() => setOpen(isOpen ? null : service.id)}>
                 <span className="srv-n num">{service.index}</span>
                 <span className="srv-t">{service.title}</span>
                 <span className="srv-plus" aria-hidden="true">
@@ -83,14 +74,7 @@ export default function ServiceIndex() {
 
               <AnimatePresence initial={false}>
                 {isOpen && (
-                  <motion.div
-                    id={`panel-${service.id}`}
-                    className="srv-panel"
-                    initial={{ height: 0 }}
-                    animate={{ height: "auto" }}
-                    exit={{ height: 0 }}
-                    transition={{ duration: 0.6, ease: EASE }}
-                  >
+                  <motion.div id={`panel-${service.id}`} className="srv-panel" initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.6, ease: EASE }}>
                     <div className="in">
                       <p className="body d">{service.description}</p>
                       <div className="tags">
