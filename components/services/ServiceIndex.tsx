@@ -2,12 +2,21 @@
 
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { services, type Tone } from "@/data/site";
 import Reveal from "@/components/motion/Reveal";
 import { usePointerFine } from "@/lib/hooks";
 import { EASE } from "@/lib/motion";
 
 const TONE_CLASS: Record<Tone, string> = { a: "", b: "v2", c: "v3", d: "v4" };
+const SERVICE_IMAGES = [
+  "/images/pexels-cottonbro-3888216.jpg",
+  "/images/pexels-canvastudio-3194519.jpg",
+  "/images/pexels-jakubzerdzicki-31949770.jpg",
+  "/images/pexels-mikael-blomkvist-6476578.jpg",
+  "/images/pexels-aleson-padilha-945919991-34104803.jpg",
+  "/images/pexels-ofspace-16323580.jpg",
+] as const;
 
 /**
  * An index, not a card set. Desktop: hover moves the title, lifts the
@@ -35,7 +44,11 @@ export default function ServiceIndex() {
       <div className="srv-wrap" ref={wrapRef} onMouseLeave={() => setHovered(null)}>
         {fine && (
           <div className={`srv-preview ${hovered !== null ? "on" : ""}`} style={{ top: previewTop }} aria-hidden="true">
-            <div className={`ph ${hovered !== null ? TONE_CLASS[services[hovered].tone] : ""}`} />
+            {hovered !== null ? (
+              <Image src={SERVICE_IMAGES[hovered]} alt="" fill sizes="250px" loading="eager" className="object-cover" />
+            ) : (
+              <div className={`ph ${TONE_CLASS[services[0].tone]}`} />
+            )}
             <span className="ph-tag">[IMAGE] service preview</span>
           </div>
         )}

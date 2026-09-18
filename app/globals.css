@@ -280,6 +280,11 @@ section {
   transition: transform var(--d-slow) var(--e);
   transition-delay: var(--dl, 0ms);
 }
+.display .line-mask {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  overflow: visible;
+}
 .in .line-mask > span,
 .line-mask.in > span {
   transform: none;

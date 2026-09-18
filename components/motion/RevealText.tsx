@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { lineRise, wordRise, VIEWPORT } from "@/lib/motion";
+import { lineRise, wordRise } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
 export interface DisplayLine {
@@ -38,7 +38,7 @@ export function LineReveal({ lines, className = "", as: Tag = "h2", indents, sta
             variants={reduced ? undefined : lineRise}
             custom={delay + i * stagger}
             initial={reduced ? false : "hidden"}
-            {...(controlled ? { animate: animate ? "visible" : "hidden" } : { whileInView: "visible", viewport: VIEWPORT })}
+            animate={controlled ? (animate ? "visible" : "hidden") : "visible"}
             className={line.serif ? "ser" : undefined}
           >
             {line.text}
@@ -61,7 +61,7 @@ export function WordReveal({ text, className = "", delay = 0 }: { text: string; 
     <span className={className}>
       {text.split(" ").map((word, i) => (
         <span key={`${word}-${i}`} className="line-mask" style={{ display: "inline-block" }}>
-          <motion.span style={{ display: "inline-block" }} variants={wordRise} custom={delay + i * 0.04} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
+          <motion.span style={{ display: "inline-block" }} variants={wordRise} custom={delay + i * 0.04} initial="hidden" animate="visible">
             {word}&nbsp;
           </motion.span>
         </span>

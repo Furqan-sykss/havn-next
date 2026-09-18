@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, VIEWPORT } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
 /** Section-level entrance. Deliberately quiet: metadata barely moves. */
@@ -27,8 +27,7 @@ export default function Reveal({
       variants={fadeUp}
       custom={delay}
       initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT}
+      animate="visible"
     >
       {children}
     </Component>

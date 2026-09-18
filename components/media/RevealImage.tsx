@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { imageReveal, VIEWPORT } from "@/lib/motion";
+import { imageReveal } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 import type { Media, Tone } from "@/data/site";
 
@@ -66,8 +66,7 @@ export default function RevealImage({
         className="inner"
         variants={reduced ? undefined : imageReveal}
         initial={reduced ? false : "hidden"}
-        whileInView="visible"
-        viewport={VIEWPORT}
+        animate="visible"
       >
         <motion.div className="par" style={reduced || !parallax ? undefined : { y }}>
           {imageSrc ? (
